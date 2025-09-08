@@ -85,28 +85,3 @@ def apply_forward_chaining(facts: List[Fact], rules: List[Dict[str, Any]]) -> Li
             inferred_facts.append(f)
 
     return inferred_facts
-
-    inferred_hypotheses = []
-
-    # Convert facts into simple string list for easy matching
-    extracted_facts = set()
-    for fact in facts:
-        if fact[0] == "has_property":
-            extracted_facts.add(fact[2].strip().lower())  # e.g. "dark", "rumbling sounds"
-        elif fact[0] == "is_a" or fact[0] == "type":
-            extracted_facts.add(fact[1].strip().lower())  # e.g. "sky"
-        elif fact[0] == "has_entity":
-            extracted_facts.add(fact[1].strip().lower())  # e.g. "sky"
-        else:
-            # generic fallback
-            extracted_facts.update([x.strip().lower() for x in fact[1:]])
-
-    # Apply rules
-    for rule in rules:
-        conditions = [tuple(item.strip().lower() for item in c) for c in rule["conditions"]]
-        if all(cond in extracted_facts for cond in conditions):
-            hypothesis = rule["hypothesis"]
-            if hypothesis not in inferred_hypotheses:
-                inferred_hypotheses.append(hypothesis)
-
-    return inferred_hypotheses
