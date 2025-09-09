@@ -1,5 +1,73 @@
 ---
 
+## 🧪 Testing
+
+This project includes unit tests for both the NLP parser and the rule engine.
+
+### How to run tests
+
+1. Make sure your virtual environment is activated.
+2. Run the following commands:
+   ```sh
+   python -m unittest test_nlp_utils.py
+   python -m unittest test_rule_engine.py
+   ```
+
+### What is tested?
+- NLP parsing of singular/plural, casing, and multiple fact patterns
+- Rule engine inference for common scenarios
+
+You can add more tests to these files to cover your own rules and NLP patterns.
+---
+
+## 📖 How it works
+
+1. **Input:**
+   - Users enter facts in structured or natural language form (e.g., `has_property(bird, wings)` or `Birds can fly`).
+2. **NLP Parsing:**
+   - The system uses spaCy to extract entities, properties, and relationships from natural language.
+3. **Fact Normalization:**
+   - All facts are normalized (e.g., singular/plural forms, casing) for consistent rule matching.
+4. **Rule Engine:**
+   - Facts are passed to a forward-chaining rule engine, which applies rules from the knowledge base to infer new facts and hypotheses.
+5. **Output:**
+   - Inferred facts and hypotheses are displayed in the CLI, GUI, or web interface.
+
+**System Flow Diagram:**
+
+```mermaid
+flowchart LR
+    A[User Input] --> B[NLP Parser]
+    B --> C[Fact Normalization]
+    C --> D[Rule Engine]
+    D --> E[Inferred Facts & Hypotheses]
+```
+
+---
+
+## ❓ Troubleshooting & FAQ
+
+**Q: Why is my fact not recognized?**
+A: Make sure your input matches a supported pattern or is a simple English sentence. Check the help section for examples.
+
+**Q: Why is no hypothesis generated?**
+A: Some rules require multiple facts (e.g., all symptoms for flu). Try adding more related facts or check the rules in `knowledge_base.py`.
+
+**Q: Can I use singular or plural?**
+A: Yes! The system normalizes both forms, so "feather" and "feathers" are treated the same.
+
+**Q: Can I use names or capitalized entities?**
+A: Yes! The parser preserves the original casing for subjects (e.g., "John").
+
+**Q: How do I add my own rules?**
+A: Edit `knowledge_base.py` and add new rule dictionaries to the `rules` list.
+
+**Q: How do I reset or clear all facts in the web UI?**
+A: Use the "Clear All" button below the facts list.
+
+---
+---
+
 ## 🌐 Web Interface
 
 You can now use the AI Hypothesis Generator in your browser!
