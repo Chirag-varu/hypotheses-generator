@@ -46,8 +46,21 @@ class HypothesisGUI:
             self.user_facts.append(parsed)
             self.facts_display.insert(tk.END, f"{parsed}\n")
             self.fact_entry.delete(0, tk.END)
-        except Exception as e:
-            messagebox.showerror("Invalid Format", f"{e}\nUse format: predicate(arg1, arg2)")
+        except Exception:
+            # Try NLP parse
+            try:
+                from nlp_utils import parse_natural_language_fact
+                nlp_facts = parse_natural_language_fact(fact_text)
+                if nlp_facts:
+                    for fact in nlp_facts:
+                        self.user_facts.append(fact)
+                        self.facts_display.insert(tk.END, f"{fact}\n")
+                    self.fact_entry.delete(0, tk.END)
+                    return
+                else:
+                    messagebox.showerror("Invalid Format", "Could not parse as a fact. Use format: predicate(arg1, arg2)")
+            except Exception as e:
+                messagebox.showerror("NLP Error", f"NLP parsing error: {e}")
 
     def show_help(self):
         help_text = """

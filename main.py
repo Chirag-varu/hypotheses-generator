@@ -33,7 +33,18 @@ def main():
             continue
 
         if "(" not in user_input or ")" not in user_input:
-            print("❌ Looks like you're trying to enter a sentence.")
+            # Try to parse as natural language
+            try:
+                from nlp_utils import parse_natural_language_fact
+                nlp_facts = parse_natural_language_fact(user_input)
+                if nlp_facts:
+                    print(f"✅ Parsed as: {nlp_facts}")
+                    user_facts.extend(nlp_facts)
+                    continue
+                else:
+                    print("❌ Could not parse the sentence as a fact.")
+            except Exception as e:
+                print(f"❌ NLP parsing error: {e}")
             print("   ✅ Please use the format: predicate(arg1, arg2)")
             print("   Example: has_property(sky, dark)\n")
             continue

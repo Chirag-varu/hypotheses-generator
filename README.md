@@ -1,9 +1,43 @@
+---
+
+## 🌐 Web Interface
+
+You can now use the AI Hypothesis Generator in your browser!
+
+### How to use the web version
+
+1. **Start the backend server:**
+   - Open a terminal in your project directory.
+   - Run:
+     ```sh
+     python web/server.py
+     ```
+   - The server will start at `http://127.0.0.1:5000/` by default.
+
+2. **Open the frontend:**
+   - Open `web/index.html` in your browser (double-click or right-click → Open with browser).
+   - Enter facts or natural language sentences just like in the CLI/GUI.
+   - Click **Add Fact** to add, then **Generate Hypotheses** to see results.
+
+### Features
+- Accepts both structured and natural language input.
+- Beautiful, modern UI (HTML/CSS/JS).
+- Results and hypotheses are shown instantly in the browser.
+
+---
 ### 🔍 AI Hypothesis Generator (CLI)
 
 #### 💬 How to enter facts:
 
-→ Format: predicate(arg1, arg2)
-→ Example: has_property(sky, dark)
+→ You can now enter facts in two ways:
+   1. **Structured format:** `predicate(arg1, arg2)` (e.g., `has_property(sky, dark)`)
+   2. **Natural language:** e.g., `X has property feather and can fly`
+
+→ The system will automatically parse simple English sentences like:
+   - `The animal has property feathers and can fly`
+   - `Birds can swim and have property wings`
+   - `X has property fur`
+
 → Type 'done' when you're finished.
 
 Enter fact: help
@@ -19,16 +53,16 @@ Enter fact: help
 - `has_symptom(entity, symptom)` → e.g. `has_symptom(john, fever)`
 - `has_part(entity, part)` → e.g. `has_part(car, wheels)`
 
-Enter fact: has_property(animal, feathers)
-Enter fact: can(animal, fly)  
+
+Enter fact: X has property feather and can fly
 Enter fact: done
 
 📚 Initial Facts:
-('has_property', 'animal', 'feathers')
-('can', 'animal', 'fly')
+('has_property', 'X', 'feather')
+('can', 'X', 'fly')
 
 🧠 Inferred Facts:
-('hypothesis', 'animal', 'might_be_a_bird')
+('hypothesis', 'X', 'might_be_a_bird')
 
 💡 Hypotheses:
 → might_be_a_bird
@@ -48,6 +82,7 @@ Enter fact: done
 ### Help Page  
 ![Help Page](image-1.png)  
 
+
 **Formats Supported:**
 - `has_property(entity, property)` → e.g. `has_property(animal, feathers)`
 - `can(entity, ability)` → e.g. `can(animal, fly)`
@@ -57,6 +92,13 @@ Enter fact: done
 - `use_sunlight(entity, action)` → e.g. `can(plant, use_sunlight)`
 - `has_symptom(entity, symptom)` → e.g. `has_symptom(john, fever)`
 - `has_part(entity, part)` → e.g. `has_part(car, wheels)`
+
+**Or use simple English sentences:**
+- `The animal has property feathers and can fly`
+- `Birds can swim and have property wings`
+- `X has property fur`
+
+The system will extract facts from these sentences automatically.
 
 ---
 
@@ -71,7 +113,19 @@ Enter fact: done
 
 ---
 
-Now you’re ready to generate smart, AI-powered hypotheses in seconds.  
-We’d love for you to try it out and share your feedback.  
+---
+
+## 🧠 New Feature: Natural Language Input (NLP)
+
+You can now enter facts as simple English sentences! The system uses NLP to extract facts like `has_property` and `can` from your input. This works in both CLI and GUI modes.
+
+**Example:**
+> X has property feather and can fly
+
+is parsed as:
+> ('has_property', 'X', 'feather')
+> ('can', 'X', 'fly')
+
+Try it out and let us know your feedback!
 
 — *@Chirag_Varu*  

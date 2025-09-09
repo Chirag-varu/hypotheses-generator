@@ -1,4 +1,21 @@
 rules = [
+    # If an entity has feathers and can fly, infer it might be an animal (for more flexible subject names)
+    {
+        "conditions": [
+            ("has_property", "X", "feathers"),
+            ("can", "X", "fly")
+        ],
+        "conclusion": ("is_a", "X", "animal")
+    },
+    # If an entity is an animal, has feathers, and can fly, infer it might be a bird
+    {
+        "conditions": [
+            ("is_a", "X", "animal"),
+            ("has_property", "X", "feathers"),
+            ("can", "X", "fly")
+        ],
+        "conclusion": ("hypothesis", "X", "might_be_a_bird")
+    },
     {
         "conditions": [
             ("has_property", "X", "feathers"),

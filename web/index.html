@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hypothesis Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI Hypothesis Generator</h1>
+        <form id="factForm">
+            <label for="factInput">Enter Fact or Sentence:</label>
+            <input type="text" id="factInput" name="factInput" placeholder="e.g. X has property feather and can fly" required>
+            <button type="submit">Add Fact</button>
+        </form>
+        <div class="facts-section">
+            <h2>Entered Facts</h2>
+        <ul id="factsList"></ul>
+        <button id="clearFactsBtn" type="button" style="margin-top:10px;background:#ef4444;">Clear All</button>
+        </div>
+        <button id="generateBtn">Generate Hypotheses</button>
+        <div class="output-section">
+            <h2>Results</h2>
+            <pre id="output"></pre>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
